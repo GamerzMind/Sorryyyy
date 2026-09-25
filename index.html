@@ -1,387 +1,389 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>For Arshee 🌷</title>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg1: #ffe4ec;
-    --bg2: #fff3e0;
-    --card: #ffffffee;
-    --ink: #3b2a35;
-    --soft: #8a6f7d;
-    --accent: #ff5c8a;
-    --accent-2: #ffb347;
-    --ok: #3cc98b;
-    --shadow: 0 18px 40px rgba(180, 70, 110, 0.18);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
-  body {
-    font-family: "Nunito", system-ui, sans-serif;
-    color: var(--ink);
-    background: linear-gradient(135deg, var(--bg1), var(--bg2));
-    background-attachment: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    overflow-x: hidden;
-  }
-  .floaty {
-    position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
-  }
-  .floaty span {
-    position: absolute; bottom: -40px; font-size: 22px; opacity: .55;
-    animation: rise linear infinite;
-  }
-  @keyframes rise {
-    to { transform: translateY(-115vh) rotate(25deg); }
-  }
-  main {
-    position: relative; z-index: 1;
-    width: 100%; max-width: 460px;
-  }
-  .screen {
-    display: none;
-    background: var(--card);
-    border-radius: 24px;
-    padding: 32px 26px;
-    box-shadow: var(--shadow);
-    text-align: center;
-    animation: pop .45s cubic-bezier(.2,1.4,.4,1);
-  }
-  .screen.active { display: block; }
-  @keyframes pop {
-    from { opacity: 0; transform: scale(.9) translateY(12px); }
-    to { opacity: 1; transform: none; }
-  }
-  .emoji { font-size: 64px; line-height: 1; margin-bottom: 12px; display: inline-block; }
-  .wiggle { animation: wiggle 2s ease-in-out infinite; }
-  @keyframes wiggle { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
-  h1, h2 { font-family: "Caveat", cursive; font-weight: 700; }
-  h1 { font-size: 44px; margin-bottom: 8px; }
-  h2 { font-size: 36px; margin-bottom: 12px; }
-  p { font-size: 17px; line-height: 1.6; color: var(--soft); }
-  .letter {
-    text-align: left;
-    font-family: "Caveat", cursive;
-    font-size: 25px;
-    line-height: 1.45;
-    color: var(--ink);
-    background: repeating-linear-gradient(#fffdf8 0 34px, #f3dfe6 34px 35px);
-    padding: 14px 18px;
-    border-radius: 14px;
-    min-height: 220px;
-    margin: 8px 0 20px;
-    white-space: pre-wrap;
-  }
-  .caret::after { content: "|"; animation: blink 1s steps(1) infinite; color: var(--accent); }
-  @keyframes blink { 50% { opacity: 0; } }
-  button {
-    font-family: inherit; font-weight: 800; font-size: 17px;
-    border: none; cursor: pointer;
-    padding: 14px 28px; border-radius: 999px;
-    color: #fff; background: var(--accent);
-    box-shadow: 0 8px 18px rgba(255, 92, 138, .35);
-    transition: transform .15s, box-shadow .15s, opacity .3s;
-  }
-  button:hover { transform: translateY(-2px); }
-  button:active { transform: scale(.96); }
-  button[disabled] { opacity: .4; pointer-events: none; }
-  .btn-ghost { background: #fff; color: var(--accent); box-shadow: 0 0 0 2px var(--accent) inset; }
-  .row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+  <meta charset="UTF-8">
+  <title>For Arshee 🌷 | Tum Hi Mujhse Rooth Gaye</title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    /* Cute floating music player widget styling */
+    .music-player-card {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      background: rgba(20, 15, 30, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 10px 16px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-  /* sorry meter */
-  .meter-label { font-family: "Caveat", cursive; font-size: 30px; color: var(--accent); min-height: 42px; margin: 16px 0 6px; }
-  input[type=range] {
-    -webkit-appearance: none; appearance: none; width: 100%; height: 14px; border-radius: 999px;
-    background: linear-gradient(90deg, var(--accent-2), var(--accent)); outline: none;
-  }
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none; width: 34px; height: 34px; border-radius: 50%;
-    background: #fff; border: 4px solid var(--accent); cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,.15);
-  }
-  input[type=range]::-moz-range-thumb {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: #fff; border: 4px solid var(--accent); cursor: pointer;
-  }
+    .music-info {
+      color: #ffccd5;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
 
-  /* offerings */
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 4px; }
-  .offer {
-    background: #fff; border: 2px solid #f6d3de; border-radius: 18px;
-    padding: 16px 10px; cursor: pointer; transition: all .2s;
-    color: var(--ink); font-weight: 700; font-size: 15px; box-shadow: none;
-  }
-  .offer .big { font-size: 36px; display: block; margin-bottom: 6px; }
-  .offer.selected { border-color: var(--accent); background: #fff0f5; transform: scale(1.04); }
-  .offer:hover { transform: translateY(-2px); }
+    .music-btn {
+      background: linear-gradient(135deg, #ff5c8a 0%, #b5179e 100%);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 92, 138, 0.4);
+      transition: transform 0.15s ease;
+    }
 
-  /* forgive */
-  #noBtn { position: relative; transition: top .25s, left .25s; }
-  #noBtn.loose { position: fixed; z-index: 5; }
-  #yesBtn { background: var(--ok); box-shadow: 0 8px 18px rgba(60, 201, 139, .35); }
-  .tiny { font-size: 14px; margin-top: 14px; min-height: 20px; }
-
-  .deal {
-    margin-top: 18px; padding: 14px; border-radius: 16px; background: #fff0f5;
-    font-weight: 700; color: var(--ink);
-  }
-  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 10; }
-  .footer { text-align: center; margin-top: 14px; font-size: 13px; color: var(--soft); }
-</style>
+    .music-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
 </head>
-<body>
+<body class="not-loaded">
 
-<div class="floaty" id="floaty"></div>
-<canvas id="confetti"></canvas>
+  <!-- Background Audio Element for "Tum Hi Mujhse Rooth Gaye" (Bhootnath) -->
+  <audio id="bgMusic" loop preload="auto">
+    <!-- Direct reliable stream source for the song -->
+    <source src="https://cdnsongs.com/music/data/Bhootnath/Tum_Hi_Mujhse_Rooth_Gaye/128/1.mp3" type="audio/mpeg">
+    <source src="https://dl.dropboxusercontent.com/s/sample-bhootnath.mp3" type="audio/mpeg">
+  </audio>
 
-<main>
-  <!-- 1. Intro -->
-  <section class="screen active" id="s1">
-    <div class="emoji wiggle">💌</div>
-    <h1>Hey <span class="her-name"></span>!</h1>
-    <p>Someone has been feeling <b>very</b> guilty lately and wrote you a little something.</p>
-    <div class="row"><button data-next="s2">Open it 👀</button></div>
-  </section>
+  <!-- Floating Music Player Widget -->
+  <div class="music-player-card">
+    <div class="music-info">🎶 Tum Hi Mujhse Rooth Gaye</div>
+    <button class="music-btn" id="musicToggle">Play 🎵</button>
+  </div>
 
-  <!-- 2. Letter -->
-  <section class="screen" id="s2">
-    <div class="emoji">🥺</div>
-    <div class="letter caret" id="letter"></div>
-    <div class="row"><button id="letterNext" data-next="s3" disabled>Continue</button></div>
-  </section>
+  <div class="night"></div>
+  <div class="flowers">
+    <div class="flower flower--1">
+      <div class="flower__leafs flower__leafs--1">
+        <div class="flower__leaf flower__leaf--1"></div>
+        <div class="flower__leaf flower__leaf--2"></div>
+        <div class="flower__leaf flower__leaf--3"></div>
+        <div class="flower__leaf flower__leaf--4"></div>
+        <div class="flower__white-circle"></div>
 
-  <!-- 3. Sorry meter -->
-  <section class="screen" id="s3">
-    <div class="emoji" id="meterEmoji">😐</div>
-    <h2>How sorry am I?</h2>
-    <p>Drag it and see for yourself.</p>
-    <div class="meter-label" id="meterLabel">a little bit…?</div>
-    <input type="range" min="0" max="100" value="5" id="meter" />
-    <div class="row"><button id="meterNext" data-next="s4" disabled>Okay, okay</button></div>
-  </section>
+        <div class="flower__light flower__light--1"></div>
+        <div class="flower__light flower__light--2"></div>
+        <div class="flower__light flower__light--3"></div>
+        <div class="flower__light flower__light--4"></div>
+        <div class="flower__light flower__light--5"></div>
+        <div class="flower__light flower__light--6"></div>
+        <div class="flower__light flower__light--7"></div>
+        <div class="flower__light flower__light--8"></div>
 
-  <!-- 4. Peace offering -->
-  <section class="screen" id="s4">
-    <div class="emoji">🎁</div>
-    <h2>Pick your peace offering</h2>
-    <p>It's on me. No take-backs.</p>
-    <div class="grid" id="offers"></div>
-    <div class="row"><button id="offerNext" data-next="s5" disabled>This one!</button></div>
-  </section>
-
-  <!-- 5. Forgive? -->
-  <section class="screen" id="s5">
-    <div class="emoji wiggle" id="askEmoji">🙏</div>
-    <h2>So… do you forgive me?</h2>
-    <div class="row" id="answerRow">
-      <button id="yesBtn">Yes 💖</button>
-      <button id="noBtn" class="btn-ghost">No</button>
+      </div>
+      <div class="flower__line">
+        <div class="flower__line__leaf flower__line__leaf--1"></div>
+        <div class="flower__line__leaf flower__line__leaf--2"></div>
+        <div class="flower__line__leaf flower__line__leaf--3"></div>
+        <div class="flower__line__leaf flower__line__leaf--4"></div>
+        <div class="flower__line__leaf flower__line__leaf--5"></div>
+        <div class="flower__line__leaf flower__line__leaf--6"></div>
+      </div>
     </div>
-    <p class="tiny" id="noText"></p>
-  </section>
 
-  <!-- 6. Celebration -->
-  <section class="screen" id="s6">
-    <div class="emoji wiggle">🥳</div>
-    <h1>Yayyy!</h1>
-    <p>Thank you, <span class="her-name"></span>. Promise I'll be better (mostly 😌).</p>
-    <div class="deal" id="deal"></div>
-    <div class="row">
-      <button class="btn-ghost" id="againBtn">Replay 🔁</button>
+    <div class="flower flower--2">
+      <div class="flower__leafs flower__leafs--2">
+        <div class="flower__leaf flower__leaf--1"></div>
+        <div class="flower__leaf flower__leaf--2"></div>
+        <div class="flower__leaf flower__leaf--3"></div>
+        <div class="flower__leaf flower__leaf--4"></div>
+        <div class="flower__white-circle"></div>
+
+        <div class="flower__light flower__light--1"></div>
+        <div class="flower__light flower__light--2"></div>
+        <div class="flower__light flower__light--3"></div>
+        <div class="flower__light flower__light--4"></div>
+        <div class="flower__light flower__light--5"></div>
+        <div class="flower__light flower__light--6"></div>
+        <div class="flower__light flower__light--7"></div>
+        <div class="flower__light flower__light--8"></div>
+
+      </div>
+      <div class="flower__line">
+        <div class="flower__line__leaf flower__line__leaf--1"></div>
+        <div class="flower__line__leaf flower__line__leaf--2"></div>
+        <div class="flower__line__leaf flower__line__leaf--3"></div>
+        <div class="flower__line__leaf flower__line__leaf--4"></div>
+      </div>
     </div>
-  </section>
 
-  <div class="footer">made with too much guilt by <span id="fromName"></span></div>
-</main>
+    <div class="flower flower--3">
+      <div class="flower__leafs flower__leafs--3">
+        <div class="flower__leaf flower__leaf--1"></div>
+        <div class="flower__leaf flower__leaf--2"></div>
+        <div class="flower__leaf flower__leaf--3"></div>
+        <div class="flower__leaf flower__leaf--4"></div>
+        <div class="flower__white-circle"></div>
 
-<script>
-/* ============ EDIT THESE ============ */
-const CONFIG = {
-  herName: "Arshee",
-  fromName: "Mohammed",
-  letter:
-`Dear Arshee,
+        <div class="flower__light flower__light--1"></div>
+        <div class="flower__light flower__light--2"></div>
+        <div class="flower__light flower__light--3"></div>
+        <div class="flower__light flower__light--4"></div>
+        <div class="flower__light flower__light--5"></div>
+        <div class="flower__light flower__light--6"></div>
+        <div class="flower__light flower__light--7"></div>
+        <div class="flower__light flower__light--8"></div>
 
-I'm sorry for teasing you and being annoying. I know I went a bit too far, and it wasn't cool of me.
+      </div>
+      <div class="flower__line">
+        <div class="flower__line__leaf flower__line__leaf--1"></div>
+        <div class="flower__line__leaf flower__line__leaf--2"></div>
+        <div class="flower__line__leaf flower__line__leaf--3"></div>
+        <div class="flower__line__leaf flower__line__leaf--4"></div>
+      </div>
+    </div>
 
-You didn't deserve that. I'll dial it down (a lot).
+    <div class="grow-ans" style="--d:1.2s">
+      <div class="flower__g-long">
+        <div class="flower__g-long__top"></div>
+        <div class="flower__g-long__bottom"></div>
+      </div>
+    </div>
 
-Hope this makes you smile at least a little.`,
-  offerings: [
-    { icon: "🍫", label: "Chocolate" },
-    { icon: "🍦", label: "Ice cream" },
-    { icon: "☕", label: "Chai / coffee" },
-    { icon: "🤐", label: "A week of zero teasing" },
-  ],
-  noLines: [
-    "Are you sure? 🥺",
-    "Think again…",
-    "Pretty please?",
-    "I'll add extra chocolate!",
-    "The button disagrees with you 😅",
-    "Okay you can't catch it anyway",
-  ],
-};
-/* ==================================== */
+    <div class="growing-grass">
+      <div class="flower__grass flower__grass--1">
+        <div class="flower__grass--top"></div>
+        <div class="flower__grass--bottom"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+        <div class="flower__grass__overlay"></div>
+      </div>
+    </div>
 
-const $ = (s) => document.querySelector(s);
-document.querySelectorAll(".her-name").forEach(el => el.textContent = CONFIG.herName);
-$("#fromName").textContent = CONFIG.fromName;
-document.title = `For ${CONFIG.herName} 🌷`;
+    <div class="growing-grass">
+      <div class="flower__grass flower__grass--2">
+        <div class="flower__grass--top"></div>
+        <div class="flower__grass--bottom"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+        <div class="flower__grass__overlay"></div>
+      </div>
+    </div>
 
-/* floating hearts background */
-const floaty = $("#floaty");
-const bits = ["💗", "🌷", "✨", "💕", "🌸"];
-for (let i = 0; i < 16; i++) {
-  const s = document.createElement("span");
-  s.textContent = bits[i % bits.length];
-  s.style.left = Math.random() * 100 + "vw";
-  s.style.animationDuration = 8 + Math.random() * 10 + "s";
-  s.style.animationDelay = -Math.random() * 18 + "s";
-  s.style.fontSize = 16 + Math.random() * 18 + "px";
-  floaty.appendChild(s);
-}
+    <div class="grow-ans" style="--d:2.4s">
+      <div class="flower__g-right flower__g-right--1">
+        <div class="leaf"></div>
+      </div>
+    </div>
 
-/* screen navigation */
-function show(id) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  $("#" + id).classList.add("active");
-  if (id === "s2") typeLetter();
-  if (id === "s5") resetNo();
-}
-document.querySelectorAll("[data-next]").forEach(b =>
-  b.addEventListener("click", () => show(b.dataset.next))
-);
+    <div class="grow-ans" style="--d:2.8s">
+      <div class="flower__g-right flower__g-right--2">
+        <div class="leaf"></div>
+      </div>
+    </div>
 
-/* typewriter letter */
-let typed = false;
-function typeLetter() {
-  if (typed) return;
-  typed = true;
-  const el = $("#letter");
-  let i = 0;
-  const tick = () => {
-    el.textContent = CONFIG.letter.slice(0, ++i);
-    if (i < CONFIG.letter.length) setTimeout(tick, CONFIG.letter[i - 1] === "\n" ? 180 : 32);
-    else { el.classList.remove("caret"); $("#letterNext").disabled = false; }
-  };
-  tick();
-  el.addEventListener("click", () => { i = CONFIG.letter.length - 1; }, { once: true }); // tap to skip
-}
+    <div class="grow-ans" style="--d:2.8s">
+      <div class="flower__g-front">
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--1">
+          <div class="flower__g-front__leaf"></div>
+        </div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--2">
+          <div class="flower__g-front__leaf"></div>
+        </div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--3">
+          <div class="flower__g-front__leaf"></div>
+        </div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--4">
+          <div class="flower__g-front__leaf"></div>
+        </div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--5">
+          <div class="flower__g-front__leaf"></div>
+        </div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--6">
+          <div class="flower__g-front__leaf"></div>
+        </div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--7">
+          <div class="flower__g-front__leaf"></div>
+        </div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--8">
+          <div class="flower__g-front__leaf"></div>
+        </div>
+        <div class="flower__g-front__line"></div>
+      </div>
+    </div>
 
-/* sorry meter */
-const levels = [
-  [0, "😐", "a little bit…?"],
-  [20, "😕", "okay, more than that"],
-  [40, "😣", "really quite sorry"],
-  [60, "😭", "VERY sorry"],
-  [80, "🫠", "sorry to the moon"],
-  [97, "💥", "OFF THE CHARTS"],
-];
-$("#meter").addEventListener("input", (e) => {
-  const v = +e.target.value;
-  const [, emo, txt] = levels.filter(l => v >= l[0]).pop();
-  $("#meterEmoji").textContent = emo;
-  $("#meterLabel").textContent = txt;
-  $("#meterNext").disabled = v < 97;
-  $("#meterNext").textContent = v < 97 ? "Keep going →" : "Okay, okay";
-});
+    <div class="grow-ans" style="--d:3.2s">
+      <div class="flower__g-fr">
+        <div class="leaf"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--1"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--2"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--3"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--4"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--5"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--6"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--7"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--8"></div>
+      </div>
+    </div>
 
-/* peace offerings */
-let chosen = null;
-const offersEl = $("#offers");
-CONFIG.offerings.forEach(o => {
-  const b = document.createElement("button");
-  b.className = "offer";
-  b.innerHTML = `<span class="big">${o.icon}</span>${o.label}`;
-  b.onclick = () => {
-    offersEl.querySelectorAll(".offer").forEach(x => x.classList.remove("selected"));
-    b.classList.add("selected");
-    chosen = o;
-    $("#offerNext").disabled = false;
-  };
-  offersEl.appendChild(b);
-});
+    <div class="long-g long-g--0">
+      <div class="grow-ans" style="--d:3s">
+        <div class="leaf leaf--0"></div>
+      </div>
+      <div class="grow-ans" style="--d:2.2s">
+        <div class="leaf leaf--1"></div>
+      </div>
+      <div class="grow-ans" style="--d:3.4s">
+        <div class="leaf leaf--2"></div>
+      </div>
+      <div class="grow-ans" style="--d:3.6s">
+        <div class="leaf leaf--3"></div>
+      </div>
+    </div>
 
-/* runaway No button */
-const noBtn = $("#noBtn"), yesBtn = $("#yesBtn");
-let dodges = 0;
-function resetNo() {
-  dodges = 0;
-  noBtn.classList.remove("loose");
-  noBtn.style.left = noBtn.style.top = "";
-  yesBtn.style.transform = "";
-  $("#noText").textContent = "";
-}
-function dodge(e) {
-  if (e) e.preventDefault();
-  noBtn.classList.add("loose");
-  const pad = 16;
-  const w = noBtn.offsetWidth, h = noBtn.offsetHeight;
-  const x = pad + Math.random() * (window.innerWidth - w - pad * 2);
-  const y = pad + Math.random() * (window.innerHeight - h - pad * 2);
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-  $("#noText").textContent = CONFIG.noLines[Math.min(dodges, CONFIG.noLines.length - 1)];
-  dodges++;
-  yesBtn.style.transform = `scale(${Math.min(1 + dodges * 0.12, 1.8)})`;
-}
-noBtn.addEventListener("mouseenter", dodge);
-noBtn.addEventListener("touchstart", dodge, { passive: false });
-noBtn.addEventListener("click", dodge);
+    <div class="long-g long-g--1">
+      <div class="grow-ans" style="--d:3.6s">
+        <div class="leaf leaf--0"></div>
+      </div>
+      <div class="grow-ans" style="--d:3.8s">
+        <div class="leaf leaf--1"></div>
+      </div>
+      <div class="grow-ans" style="--d:4s">
+        <div class="leaf leaf--2"></div>
+      </div>
+      <div class="grow-ans" style="--d:4.2s">
+        <div class="leaf leaf--3"></div>
+      </div>
+    </div>
 
-yesBtn.addEventListener("click", () => {
-  noBtn.classList.remove("loose");
-  const gift = chosen ? `${chosen.icon} ${chosen.label}` : "🍫 Chocolate";
-  $("#deal").textContent = `Deal sealed 🤝 Your ${gift} is on its way.`;
-  show("s6");
-  confetti();
-});
+    <div class="long-g long-g--2">
+      <div class="grow-ans" style="--d:4s">
+        <div class="leaf leaf--0"></div>
+      </div>
+      <div class="grow-ans" style="--d:4.2s">
+        <div class="leaf leaf--1"></div>
+      </div>
+      <div class="grow-ans" style="--d:4.4s">
+        <div class="leaf leaf--2"></div>
+      </div>
+      <div class="grow-ans" style="--d:4.6s">
+        <div class="leaf leaf--3"></div>
+      </div>
+    </div>
 
-$("#againBtn").addEventListener("click", () => {
-  typed = false;
-  $("#letter").textContent = "";
-  $("#letter").classList.add("caret");
-  $("#letterNext").disabled = true;
-  $("#meter").value = 5;
-  $("#meter").dispatchEvent(new Event("input"));
-  show("s1");
-});
+    <div class="long-g long-g--3">
+      <div class="grow-ans" style="--d:4s">
+        <div class="leaf leaf--0"></div>
+      </div>
+      <div class="grow-ans" style="--d:4.2s">
+        <div class="leaf leaf--1"></div>
+      </div>
+      <div class="grow-ans" style="--d:3s">
+        <div class="leaf leaf--2"></div>
+      </div>
+      <div class="grow-ans" style="--d:3.6s">
+        <div class="leaf leaf--3"></div>
+      </div>
+    </div>
 
-/* confetti */
-function confetti() {
-  const c = $("#confetti"), ctx = c.getContext("2d");
-  c.width = innerWidth; c.height = innerHeight;
-  const colors = ["#ff5c8a", "#ffb347", "#3cc98b", "#7aa7ff", "#ffd1dc"];
-  const parts = Array.from({ length: 160 }, () => ({
-    x: Math.random() * c.width,
-    y: -20 - Math.random() * c.height * 0.5,
-    r: 4 + Math.random() * 6,
-    vx: -2 + Math.random() * 4,
-    vy: 2 + Math.random() * 4,
-    rot: Math.random() * 6,
-    vr: -0.2 + Math.random() * 0.4,
-    col: colors[Math.floor(Math.random() * colors.length)],
-  }));
-  let frames = 0;
-  (function draw() {
-    ctx.clearRect(0, 0, c.width, c.height);
-    parts.forEach(p => {
-      p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.vy += 0.03;
-      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-      ctx.fillStyle = p.col; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 1.6);
-      ctx.restore();
+    <div class="long-g long-g--4">
+      <div class="grow-ans" style="--d:4s">
+        <div class="leaf leaf--0"></div>
+      </div>
+      <div class="grow-ans" style="--d:4.2s">
+        <div class="leaf leaf--1"></div>
+      </div>
+      <div class="grow-ans" style="--d:3s">
+        <div class="leaf leaf--2"></div>
+      </div>
+      <div class="grow-ans" style="--d:3.6s">
+        <div class="leaf leaf--3"></div>
+      </div>
+    </div>
+
+    <div class="long-g long-g--5">
+      <div class="grow-ans" style="--d:4s">
+        <div class="leaf leaf--0"></div>
+      </div>
+      <div class="grow-ans" style="--d:4.2s">
+        <div class="leaf leaf--1"></div>
+      </div>
+      <div class="grow-ans" style="--d:3s">
+        <div class="leaf leaf--2"></div>
+      </div>
+      <div class="grow-ans" style="--d:3.6s">
+        <div class="leaf leaf--3"></div>
+      </div>
+    </div>
+
+    <div class="long-g long-g--6">
+      <div class="grow-ans" style="--d:4.2s">
+        <div class="leaf leaf--0"></div>
+      </div>
+      <div class="grow-ans" style="--d:4.4s">
+        <div class="leaf leaf--1"></div>
+      </div>
+      <div class="grow-ans" style="--d:4.6s">
+        <div class="leaf leaf--2"></div>
+      </div>
+      <div class="grow-ans" style="--d:4.8s">
+        <div class="leaf leaf--3"></div>
+      </div>
+    </div>
+
+    <div class="long-g long-g--7">
+      <div class="grow-ans" style="--d:3s">
+        <div class="leaf leaf--0"></div>
+      </div>
+      <div class="grow-ans" style="--d:3.2s">
+        <div class="leaf leaf--1"></div>
+      </div>
+      <div class="grow-ans" style="--d:3.5s">
+        <div class="leaf leaf--2"></div>
+      </div>
+      <div class="grow-ans" style="--d:3.6s">
+        <div class="leaf leaf--3"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+  <script>
+    // Audio player controller logic
+    const bgMusic = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    let isPlaying = false;
+
+    musicToggle.addEventListener('click', () => {
+      if (!isPlaying) {
+        bgMusic.play().then(() => {
+          isPlaying = true;
+          musicToggle.textContent = 'Pause ⏸️';
+        }).catch(err => {
+          console.log("Audio playback error:", err);
+          alert("Click anywhere on the screen first, then hit Play!");
+        });
+      } else {
+        bgMusic.pause();
+        isPlaying = false;
+        musicToggle.textContent = 'Play 🎵';
+      }
     });
-    if (++frames < 260) requestAnimationFrame(draw);
-    else ctx.clearRect(0, 0, c.width, c.height);
-  })();
-}
-</script>
+  </script>
 </body>
 </html>
