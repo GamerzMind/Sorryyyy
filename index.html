@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Arshee 🌷</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg1: #ffe4ec;
+    --bg2: #fff3e0;
+    --card: #ffffffee;
+    --ink: #3b2a35;
+    --soft: #8a6f7d;
+    --accent: #ff5c8a;
+    --accent-2: #ffb347;
+    --ok: #3cc98b;
+    --shadow: 0 18px 40px rgba(180, 70, 110, 0.18);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Nunito", system-ui, sans-serif;
+    color: var(--ink);
+    background: linear-gradient(135deg, var(--bg1), var(--bg2));
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    overflow-x: hidden;
+  }
+  .floaty {
+    position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
+  }
+  .floaty span {
+    position: absolute; bottom: -40px; font-size: 22px; opacity: .55;
+    animation: rise linear infinite;
+  }
+  @keyframes rise {
+    to { transform: translateY(-115vh) rotate(25deg); }
+  }
+  main {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 460px;
+  }
+  .screen {
+    display: none;
+    background: var(--card);
+    border-radius: 24px;
+    padding: 32px 26px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    animation: pop .45s cubic-bezier(.2,1.4,.4,1);
+  }
+  .screen.active { display: block; }
+  @keyframes pop {
+    from { opacity: 0; transform: scale(.9) translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+  .emoji { font-size: 64px; line-height: 1; margin-bottom: 12px; display: inline-block; }
+  .wiggle { animation: wiggle 2s ease-in-out infinite; }
+  @keyframes wiggle { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+  h1, h2 { font-family: "Caveat", cursive; font-weight: 700; }
+  h1 { font-size: 44px; margin-bottom: 8px; }
+  h2 { font-size: 36px; margin-bottom: 12px; }
+  p { font-size: 17px; line-height: 1.6; color: var(--soft); }
+  .letter {
+    text-align: left;
+    font-family: "Caveat", cursive;
+    font-size: 25px;
+    line-height: 1.45;
+    color: var(--ink);
+    background: repeating-linear-gradient(#fffdf8 0 34px, #f3dfe6 34px 35px);
+    padding: 14px 18px;
+    border-radius: 14px;
+    min-height: 220px;
+    margin: 8px 0 20px;
+    white-space: pre-wrap;
+  }
+  .caret::after { content: "|"; animation: blink 1s steps(1) infinite; color: var(--accent); }
+  @keyframes blink { 50% { opacity: 0; } }
+  button {
+    font-family: inherit; font-weight: 800; font-size: 17px;
+    border: none; cursor: pointer;
+    padding: 14px 28px; border-radius: 999px;
+    color: #fff; background: var(--accent);
+    box-shadow: 0 8px 18px rgba(255, 92, 138, .35);
+    transition: transform .15s, box-shadow .15s, opacity .3s;
+  }
+  button:hover { transform: translateY(-2px); }
+  button:active { transform: scale(.96); }
+  button[disabled] { opacity: .4; pointer-events: none; }
+  .btn-ghost { background: #fff; color: var(--accent); box-shadow: 0 0 0 2px var(--accent) inset; }
+  .row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+
+  /* sorry meter */
+  .meter-label { font-family: "Caveat", cursive; font-size: 30px; color: var(--accent); min-height: 42px; margin: 16px 0 6px; }
+  input[type=range] {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 14px; border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent-2), var(--accent)); outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 34px; height: 34px; border-radius: 50%;
+    background: #fff; border: 4px solid var(--accent); cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #fff; border: 4px solid var(--accent); cursor: pointer;
+  }
+
+  /* offerings */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 4px; }
+  .offer {
+    background: #fff; border: 2px solid #f6d3de; border-radius: 18px;
+    padding: 16px 10px; cursor: pointer; transition: all .2s;
+    color: var(--ink); font-weight: 700; font-size: 15px; box-shadow: none;
+  }
+  .offer .big { font-size: 36px; display: block; margin-bottom: 6px; }
+  .offer.selected { border-color: var(--accent); background: #fff0f5; transform: scale(1.04); }
+  .offer:hover { transform: translateY(-2px); }
+
+  /* forgive */
+  #noBtn { position: relative; transition: top .25s, left .25s; }
+  #noBtn.loose { position: fixed; z-index: 5; }
+  #yesBtn { background: var(--ok); box-shadow: 0 8px 18px rgba(60, 201, 139, .35); }
+  .tiny { font-size: 14px; margin-top: 14px; min-height: 20px; }
+
+  .deal {
+    margin-top: 18px; padding: 14px; border-radius: 16px; background: #fff0f5;
+    font-weight: 700; color: var(--ink);
+  }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 10; }
+  .footer { text-align: center; margin-top: 14px; font-size: 13px; color: var(--soft); }
+</style>
+</head>
+<body>
+
+<div class="floaty" id="floaty"></div>
+<canvas id="confetti"></canvas>
+
+<main>
+  <!-- 1. Intro -->
+  <section class="screen active" id="s1">
+    <div class="emoji wiggle">💌</div>
+    <h1>Hey <span class="her-name"></span>!</h1>
+    <p>Someone has been feeling <b>very</b> guilty lately and wrote you a little something.</p>
+    <div class="row"><button data-next="s2">Open it 👀</button></div>
+  </section>
+
+  <!-- 2. Letter -->
+  <section class="screen" id="s2">
+    <div class="emoji">🥺</div>
+    <div class="letter caret" id="letter"></div>
+    <div class="row"><button id="letterNext" data-next="s3" disabled>Continue</button></div>
+  </section>
+
+  <!-- 3. Sorry meter -->
+  <section class="screen" id="s3">
+    <div class="emoji" id="meterEmoji">😐</div>
+    <h2>How sorry am I?</h2>
+    <p>Drag it and see for yourself.</p>
+    <div class="meter-label" id="meterLabel">a little bit…?</div>
+    <input type="range" min="0" max="100" value="5" id="meter" />
+    <div class="row"><button id="meterNext" data-next="s4" disabled>Okay, okay</button></div>
+  </section>
+
+  <!-- 4. Peace offering -->
+  <section class="screen" id="s4">
+    <div class="emoji">🎁</div>
+    <h2>Pick your peace offering</h2>
+    <p>It's on me. No take-backs.</p>
+    <div class="grid" id="offers"></div>
+    <div class="row"><button id="offerNext" data-next="s5" disabled>This one!</button></div>
+  </section>
+
+  <!-- 5. Forgive? -->
+  <section class="screen" id="s5">
+    <div class="emoji wiggle" id="askEmoji">🙏</div>
+    <h2>So… do you forgive me?</h2>
+    <div class="row" id="answerRow">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn" class="btn-ghost">No</button>
+    </div>
+    <p class="tiny" id="noText"></p>
+  </section>
+
+  <!-- 6. Celebration -->
+  <section class="screen" id="s6">
+    <div class="emoji wiggle">🥳</div>
+    <h1>Yayyy!</h1>
+    <p>Thank you, <span class="her-name"></span>. Promise I'll be better (mostly 😌).</p>
+    <div class="deal" id="deal"></div>
+    <div class="row">
+      <button class="btn-ghost" id="againBtn">Replay 🔁</button>
+    </div>
+  </section>
+
+  <div class="footer">made with too much guilt by <span id="fromName"></span></div>
+</main>
+
+<script>
+/* ============ EDIT THESE ============ */
+const CONFIG = {
+  herName: "Arshee",
+  fromName: "Mohammed",
+  letter:
+`Dear Arshee,
+
+I'm sorry for teasing you and being annoying. I know I went a bit too far, and it wasn't cool of me.
+
+You didn't deserve that. I'll dial it down (a lot).
+
+Hope this makes you smile at least a little.`,
+  offerings: [
+    { icon: "🍫", label: "Chocolate" },
+    { icon: "🍦", label: "Ice cream" },
+    { icon: "☕", label: "Chai / coffee" },
+    { icon: "🤐", label: "A week of zero teasing" },
+  ],
+  noLines: [
+    "Are you sure? 🥺",
+    "Think again…",
+    "Pretty please?",
+    "I'll add extra chocolate!",
+    "The button disagrees with you 😅",
+    "Okay you can't catch it anyway",
+  ],
+};
+/* ==================================== */
+
+const $ = (s) => document.querySelector(s);
+document.querySelectorAll(".her-name").forEach(el => el.textContent = CONFIG.herName);
+$("#fromName").textContent = CONFIG.fromName;
+document.title = `For ${CONFIG.herName} 🌷`;
+
+/* floating hearts background */
+const floaty = $("#floaty");
+const bits = ["💗", "🌷", "✨", "💕", "🌸"];
+for (let i = 0; i < 16; i++) {
+  const s = document.createElement("span");
+  s.textContent = bits[i % bits.length];
+  s.style.left = Math.random() * 100 + "vw";
+  s.style.animationDuration = 8 + Math.random() * 10 + "s";
+  s.style.animationDelay = -Math.random() * 18 + "s";
+  s.style.fontSize = 16 + Math.random() * 18 + "px";
+  floaty.appendChild(s);
+}
+
+/* screen navigation */
+function show(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  $("#" + id).classList.add("active");
+  if (id === "s2") typeLetter();
+  if (id === "s5") resetNo();
+}
+document.querySelectorAll("[data-next]").forEach(b =>
+  b.addEventListener("click", () => show(b.dataset.next))
+);
+
+/* typewriter letter */
+let typed = false;
+function typeLetter() {
+  if (typed) return;
+  typed = true;
+  const el = $("#letter");
+  let i = 0;
+  const tick = () => {
+    el.textContent = CONFIG.letter.slice(0, ++i);
+    if (i < CONFIG.letter.length) setTimeout(tick, CONFIG.letter[i - 1] === "\n" ? 180 : 32);
+    else { el.classList.remove("caret"); $("#letterNext").disabled = false; }
+  };
+  tick();
+  el.addEventListener("click", () => { i = CONFIG.letter.length - 1; }, { once: true }); // tap to skip
+}
+
+/* sorry meter */
+const levels = [
+  [0, "😐", "a little bit…?"],
+  [20, "😕", "okay, more than that"],
+  [40, "😣", "really quite sorry"],
+  [60, "😭", "VERY sorry"],
+  [80, "🫠", "sorry to the moon"],
+  [97, "💥", "OFF THE CHARTS"],
+];
+$("#meter").addEventListener("input", (e) => {
+  const v = +e.target.value;
+  const [, emo, txt] = levels.filter(l => v >= l[0]).pop();
+  $("#meterEmoji").textContent = emo;
+  $("#meterLabel").textContent = txt;
+  $("#meterNext").disabled = v < 97;
+  $("#meterNext").textContent = v < 97 ? "Keep going →" : "Okay, okay";
+});
+
+/* peace offerings */
+let chosen = null;
+const offersEl = $("#offers");
+CONFIG.offerings.forEach(o => {
+  const b = document.createElement("button");
+  b.className = "offer";
+  b.innerHTML = `<span class="big">${o.icon}</span>${o.label}`;
+  b.onclick = () => {
+    offersEl.querySelectorAll(".offer").forEach(x => x.classList.remove("selected"));
+    b.classList.add("selected");
+    chosen = o;
+    $("#offerNext").disabled = false;
+  };
+  offersEl.appendChild(b);
+});
+
+/* runaway No button */
+const noBtn = $("#noBtn"), yesBtn = $("#yesBtn");
+let dodges = 0;
+function resetNo() {
+  dodges = 0;
+  noBtn.classList.remove("loose");
+  noBtn.style.left = noBtn.style.top = "";
+  yesBtn.style.transform = "";
+  $("#noText").textContent = "";
+}
+function dodge(e) {
+  if (e) e.preventDefault();
+  noBtn.classList.add("loose");
+  const pad = 16;
+  const w = noBtn.offsetWidth, h = noBtn.offsetHeight;
+  const x = pad + Math.random() * (window.innerWidth - w - pad * 2);
+  const y = pad + Math.random() * (window.innerHeight - h - pad * 2);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  $("#noText").textContent = CONFIG.noLines[Math.min(dodges, CONFIG.noLines.length - 1)];
+  dodges++;
+  yesBtn.style.transform = `scale(${Math.min(1 + dodges * 0.12, 1.8)})`;
+}
+noBtn.addEventListener("mouseenter", dodge);
+noBtn.addEventListener("touchstart", dodge, { passive: false });
+noBtn.addEventListener("click", dodge);
+
+yesBtn.addEventListener("click", () => {
+  noBtn.classList.remove("loose");
+  const gift = chosen ? `${chosen.icon} ${chosen.label}` : "🍫 Chocolate";
+  $("#deal").textContent = `Deal sealed 🤝 Your ${gift} is on its way.`;
+  show("s6");
+  confetti();
+});
+
+$("#againBtn").addEventListener("click", () => {
+  typed = false;
+  $("#letter").textContent = "";
+  $("#letter").classList.add("caret");
+  $("#letterNext").disabled = true;
+  $("#meter").value = 5;
+  $("#meter").dispatchEvent(new Event("input"));
+  show("s1");
+});
+
+/* confetti */
+function confetti() {
+  const c = $("#confetti"), ctx = c.getContext("2d");
+  c.width = innerWidth; c.height = innerHeight;
+  const colors = ["#ff5c8a", "#ffb347", "#3cc98b", "#7aa7ff", "#ffd1dc"];
+  const parts = Array.from({ length: 160 }, () => ({
+    x: Math.random() * c.width,
+    y: -20 - Math.random() * c.height * 0.5,
+    r: 4 + Math.random() * 6,
+    vx: -2 + Math.random() * 4,
+    vy: 2 + Math.random() * 4,
+    rot: Math.random() * 6,
+    vr: -0.2 + Math.random() * 0.4,
+    col: colors[Math.floor(Math.random() * colors.length)],
+  }));
+  let frames = 0;
+  (function draw() {
+    ctx.clearRect(0, 0, c.width, c.height);
+    parts.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.vy += 0.03;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.col; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 1.6);
+      ctx.restore();
+    });
+    if (++frames < 260) requestAnimationFrame(draw);
+    else ctx.clearRect(0, 0, c.width, c.height);
+  })();
+}
+</script>
+</body>
+</html>
